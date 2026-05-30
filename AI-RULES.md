@@ -12,10 +12,18 @@
 
 ## 01. Auth / Аутентификация
 - Supabase Auth + `@supabase/ssr` (cookie-based sessions / cookie-сессии)
-- ONE password field + show/hide toggle, NO "confirm password" (+56% conversion) / ОДНО поле пароля + «показать/скрыть», БЕЗ «повторите пароль»
+- **COMPLETE auth flow — ALL screens required / ПОЛНЫЙ auth-flow — ВСЕ экраны обязательны:**
+  - Login: email + password + "No account? Sign up" + "Forgot password?" + OAuth / Вход: email + пароль + «Нет аккаунта?» + «Забыли пароль?» + OAuth
+  - Register: email + password + "Already have account? Sign in" + PD consent checkbox / Регистрация: + «Уже есть аккаунт?» + галочка согласия на ПДн
+  - Forgot Password: email field + "Send reset link" + "Back to login" / Сброс: поле email + «Отправить ссылку» + «Вернуться»
+  - Update Password: new password field after email link / Новый пароль: после перехода по ссылке из письма
+  - Auth Callback: `app/auth/callback/route.ts` — handles code exchange (without it auth emails don't work!) / обрабатывает code exchange (без него письма не работают!)
+- Middleware: not authenticated → redirect /login; already authenticated → redirect /dashboard (don't show login to logged-in users!) / Не показывай логин залогиненному пользователю!
+- ONE password field + show/hide, NO "confirm password" (+56% conversion) / ОДНО поле пароля, БЕЗ «повторите пароль»
 - Show password rules inline, not after error / Правила пароля — сразу у поля, не после ошибки
-- Protected routes — session check in middleware / Защищённые роуты — проверка сессии в middleware
-- Default Supabase SMTP = 2 emails/hour → connect Resend / Стандартный SMTP = 2 письма/час → подключи Resend
+- On reset page do NOT reveal if account exists (information leak) / На сбросе НЕ сообщай, существует ли аккаунт
+- **VERIFY DEPENDENCIES are installed:** `zod`, `@supabase/ssr`, `react-hook-form`, `@hookform/resolvers` — AI often imports but forgets `npm i` → page crashes / AI часто импортирует, но забывает установить → страница падает
+- Default Supabase SMTP = 2 emails/hour → connect Resend (otherwise reset/confirm emails won't arrive in prod) / Стандартный SMTP = 2/час → подключи Resend (иначе письма не дойдут)
 
 ## 02. RLS / Авторизация
 - RLS is OFF by default — enable on EVERY public table / RLS ВЫКЛЮЧЕН по умолчанию — включи на КАЖДОЙ таблице
