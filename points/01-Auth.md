@@ -76,12 +76,18 @@ if (user && isAuthRoute) return redirect('/dashboard');
 ```
 
 ## UX-паттерн пароля / Password UX
-**Регистрация:** ОДНО поле пароля + «показать/скрыть». БЕЗ «повторите пароль».
-**Register:** ONE password field + show/hide toggle. NO "confirm password".
+**Кнопка «показать/скрыть» (глаз) — ОБЯЗАТЕЛЬНА на каждом поле пароля: вход, регистрация, сброс, смена.**
+**Show/hide toggle (eye icon) — MANDATORY on every password field: login, register, reset, change.**
+
+**Регистрация:** ОДНО поле пароля + показать/скрыть. БЕЗ «повторите пароль».
+**Register:** ONE password field + show/hide. NO "confirm password".
 Кейс Zuko: удаление confirm-password при регистрации дало **+56,3% конверсии**.
 
-**Сброс/смена пароля:** ДВА поля (новый + подтверждение), оба скрыты по умолчанию. Ошибка в пароле = пользователь снова заблокирован.
-**Reset/change password:** TWO fields (new + confirm), both hidden by default. Typo = user locked out again.
+**Вход:** поле пароля + показать/скрыть.
+**Login:** password field + show/hide.
+
+**Сброс/смена пароля:** ДВА поля (новый + подтверждение), оба с кнопкой показать/скрыть. Ошибка в пароле = пользователь снова заблокирован.
+**Reset/change password:** TWO fields (new + confirm), both with show/hide toggle. Typo = user locked out again.
 - Правила пароля показывай **сразу** у поля, не после ошибки / Show password rules inline, not after error
 - Валидируй на отправке, не на каждое нажатие → [[08-Forms]] / Validate on submit, not on every keystroke
 - Ссылку «Забыли пароль?» — под полем пароля / "Forgot password?" link — below password field

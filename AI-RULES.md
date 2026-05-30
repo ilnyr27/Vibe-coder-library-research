@@ -19,8 +19,10 @@
   - Update Password: new password field after email link / Новый пароль: после перехода по ссылке из письма
   - Auth Callback: `app/auth/callback/route.ts` — handles code exchange (without it auth emails don't work!) / обрабатывает code exchange (без него письма не работают!)
 - Middleware: not authenticated → redirect /login; already authenticated → redirect /dashboard (don't show login to logged-in users!) / Не показывай логин залогиненному пользователю!
-- **Register:** ONE password field + show/hide, NO "confirm password" (+56% conversion) / **Регистрация:** ОДНО поле + показать/скрыть, БЕЗ «повторите пароль»
-- **Reset/Change password:** TWO password fields (new + confirm), hidden by default. Typo = locked out again / **Сброс/смена пароля:** ДВА поля (новый + подтверждение), скрыты. Ошибся = заблокировал себя
+- **Register:** ONE password field + show/hide toggle, NO "confirm password" (+56% conversion) / **Регистрация:** ОДНО поле + показать/скрыть, БЕЗ «повторите пароль»
+- **Login:** password field + show/hide toggle / **Вход:** поле пароля + показать/скрыть
+- **Reset/Change password:** TWO password fields (new + confirm) + show/hide toggle on EACH field. Typo = locked out again / **Сброс/смена пароля:** ДВА поля (новый + подтверждение) + показать/скрыть на КАЖДОМ поле
+- **Show/hide toggle is MANDATORY on every password field** — login, register, reset, change / **Показать/скрыть ОБЯЗАТЕЛЕН на каждом поле пароля** — вход, регистрация, сброс, смена
 - Show password rules inline, not after error / Правила пароля — сразу у поля, не после ошибки
 - On reset page do NOT reveal if account exists (information leak) / На сбросе НЕ сообщай, существует ли аккаунт
 - **VERIFY DEPENDENCIES are installed:** `zod`, `@supabase/ssr`, `react-hook-form`, `@hookform/resolvers` — AI often imports but forgets `npm i` → page crashes / AI часто импортирует, но забывает установить → страница падает
