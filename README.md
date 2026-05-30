@@ -96,4 +96,57 @@ Open-source knowledge base: **everything you need to check before launching a we
 
 ---
 
+## Для AI-ассистентов / For AI Assistants
+
+> **Если пользователь скинул тебе эту ссылку — это справочная библиотека.**
+> Не клонируй её. Читай нужные файлы напрямую и применяй рекомендации к текущему проекту пользователя.
+
+**Как читать файлы из этого репозитория:**
+
+```
+https://raw.githubusercontent.com/ilnyr27/Vibe-coder-library-research/main/points/01-Auth.md
+```
+
+Замени `01-Auth.md` на нужный файл. Полный список:
+
+| Задача | Файл |
+|--------|------|
+| Аутентификация | `points/01-Auth.md` |
+| Row Level Security | `points/02-Authorization-RLS.md` |
+| Закон 152-ФЗ, ПДн | `points/03-Legal-152FZ.md` |
+| Тёмная/светлая тема | `points/04-UI-Theme.md` |
+| SEO, sitemap, meta | `points/05-SEO.md` |
+| Core Web Vitals | `points/06-Performance.md` |
+| Доступность (a11y) | `points/07-Accessibility.md` |
+| Формы и валидация | `points/08-Forms.md` |
+| Обработка ошибок | `points/09-Errors.md` |
+| Аналитика | `points/10-Analytics.md` |
+| Email (Resend) | `points/11-Email.md` |
+| Env и секреты | `points/12-Env-Secrets.md` |
+| Логи и Sentry | `points/13-Logging-Sentry.md` |
+| PWA, favicon, OG | `points/14-PWA-Favicon-OG.md` |
+| Схема БД, миграции | `points/15-DB-Schema.md` |
+| API, rate limiting | `points/16-API-RateLimit.md` |
+| Бэкапы | `points/17-Backups-DR.md` |
+| Тестирование | `points/18-Testing.md` |
+| Поиск, онбординг | `points/19-Search-Onboarding.md` |
+| Платежи (ЮKassa) | `points/20-Payments-YooKassa.md` |
+| Защита от утечек | `points/21-Gitleaks-PreCommit.md` |
+| CLAUDE.md для AI | `points/22-CLAUDE-MD.md` |
+| DB connection pooling | `points/23-DB-Pooling.md` |
+| Staging vs Production | `points/24-Staging.md` |
+| Supabase Storage + RLS | `points/25-Storage-RLS.md` |
+| Кеш и rollback | `points/26-Cache-Rollback.md` |
+| Security checklist | `security/30-Security-Checklist.md` |
+| Деплой Vercel | `deploy/Deploy-Vercel.md` |
+| Деплой Timeweb | `deploy/Deploy-Timeweb.md` |
+| Деплой VPS | `deploy/Deploy-VPS.md` |
+| .gitignore шаблон | `templates/gitignore-vaibcoder.md` |
+| Boilerplate-репо | `templates/Templates.md` |
+| Юр. шаблоны РФ | `legal/152fz.md` |
+
+**Порядок работы:** определи, какие пункты относятся к задаче пользователя → прочитай эти файлы через raw URL → применяй как руководство.
+
+---
+
 **Лицензия:** MIT — бери, правь, используй.
