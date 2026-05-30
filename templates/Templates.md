@@ -13,6 +13,10 @@ updated: 2026-05-30
 
 - [[gitignore-vaibcoder]] — **эталонный .gitignore** для вайбкодера (11 категорий: секреты, AI-конфиги, IDE, Next.js, Supabase, Docker и др.)
 
+## Аудит / Audit
+
+- [[Audit-Prompt]] — **универсальный промпт для полного аудита сайта** (10 ролей: QA, UX, Frontend, Product, Security, SEO, Marketing, DevOps, Accessibility, Legal)
+
 ## Boilerplates
 
 - **`Razikus/supabase-nextjs-template`** — ЛУЧШИЙ «всё-в-одном»: Next.js 15 + Supabase + Tailwind; auth, управление пользователями, файлы, RLS, темы, i18n (EN/PL/ZH), юр-документы (markdown), 2FA. Apache-2.0. **Форкай это под старт.**

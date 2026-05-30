@@ -83,6 +83,7 @@ Open-source knowledge base: **everything you need to check before launching a we
 | [Legal templates](legal/) | Privacy policy, PD consent templates | Политика конфиденциальности, согласие на ПДн |
 | [.gitignore](templates/gitignore-vaibcoder.md) | Reference template: 11 categories incl. AI configs | Эталонный шаблон: 11 категорий, включая AI-конфиги |
 | [Boilerplates](templates/Templates.md) | Ready-to-fork starter repos | Готовые репозитории под форк |
+| [Site Audit](templates/Audit-Prompt.md) | Full audit prompt: 10 roles, 80+ checks, copy & paste | Полный аудит сайта: 10 ролей, 80+ проверок, копируй и вставляй |
 
 ---
 

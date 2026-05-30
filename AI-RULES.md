@@ -201,3 +201,7 @@
 8. CORS — narrow / узко
 9. Cookies: httpOnly, secure, sameSite
 10. Input validation everywhere / Валидация ввода везде
+
+## Full Site Audit / Полный аудит сайта
+- For a complete audit use the prompt from `templates/Audit-Prompt.md` — 10 roles, 80+ checks / Для полного аудита используй промпт из `templates/Audit-Prompt.md` — 10 ролей, 80+ проверок
+- Fetch: `https://raw.githubusercontent.com/ilnyr27/Vibe-coder-library-research/main/templates/Audit-Prompt.md`
