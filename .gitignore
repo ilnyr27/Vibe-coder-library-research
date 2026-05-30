@@ -1,8 +1,71 @@
+# Secrets & env
 .env
-.env.local
-.env*.local
-node_modules/
-.DS_Store
-.obsidian/workspace.json
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+serviceAccountKey.json
+credentials.json
+.npmrc
+
+# AI tools (2025-2026: vibe coding configs with tokens)
 .mcp.json
+.claude/
+.cursor/
+.aider*
+.continue/
+.codeium/
+.codex/
+.bolt/
+.v0/
+.windsurf/
+claude_desktop_config.json
+
+# IDE & editors
 .vscode/
+.idea/
+.fleet/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Next.js / Vercel / Turbo
+.next/
+out/
+.vercel/
+.turbo/
+dist/
+build/
+
+# Supabase local
+.supabase/
+supabase/.temp/
+supabase/.branches/
+
+# Obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Database & logs
+*.sqlite
+*.db
+*.log
+dump.sql
+backup.sql
+
+# Tests
+coverage/
+.nyc_output/
