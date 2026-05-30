@@ -1,7 +1,9 @@
-# VAIBCODER — Библиотека Вайбкодера
+# Vibe Coder Library / Библиотека Вайбкодера
 
+Open-source knowledge base: **everything you need to check before launching a website.**
 Открытая база знаний: **всё, что нужно проверить перед запуском сайта.**
-Стек 2026: Next.js 15 · TypeScript · Tailwind v4 · shadcn/ui · Supabase · Vercel.
+
+**Stack 2026:** Next.js 15 · TypeScript · Tailwind v4 · shadcn/ui · Supabase · Vercel.
 
 ---
 
