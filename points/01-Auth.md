@@ -75,8 +75,8 @@ if (user && isAuthRoute) return redirect('/dashboard');
 ```
 
 ## UX-паттерн пароля / Password UX
-**ОДНО поле пароля + «показать/скрыть». БЕЗ «повторите пароль».**
-**ONE password field + show/hide toggle. NO "confirm password".**
+**ОДНО поле пароля + «показать/скрыть». БЕЗ «повторите пароль». ВЕЗДЕ: регистрация, сброс, смена.**
+**ONE password field + show/hide toggle. NO "confirm password". EVERYWHERE: register, reset, change.**
 Кейс Zuko: удаление confirm-password дало **+56,3% конверсии** без роста сбросов.
 *Zuko case: removing confirm-password gave +56.3% conversion with no increase in resets.*
 
