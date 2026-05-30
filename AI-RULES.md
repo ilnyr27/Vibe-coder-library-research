@@ -1,10 +1,12 @@
-# AI-RULES — Правила для AI-ассистента
+# AI-RULES — Vibe Coder Library
 
-> **Ты получил ссылку на эту библиотеку от пользователя.**
-> Это справочник для проектов на Next.js 15 + Supabase + Tailwind v4 + shadcn/ui.
-> Применяй эти правила к текущему проекту пользователя.
-> Если нужны детали по конкретному пункту — читай полную заметку по raw URL:
-> `https://raw.githubusercontent.com/ilnyr27/Vibe-coder-library-research/main/points/<файл>`
+> **You received a link to this library from the user.**
+> This is a reference guide for projects built with Next.js 15 + Supabase + Tailwind v4 + shadcn/ui.
+> Apply these rules to the user's current project. Do not clone this repo — just read and follow.
+> For details on a specific point, fetch the full note via raw URL:
+> `https://raw.githubusercontent.com/ilnyr27/Vibe-coder-library-research/main/points/<file>`
+>
+> **Workflow:** read these rules → apply to the user's project → fetch `points/XX-Name.md` only when you need deeper context.
 
 ---
 
