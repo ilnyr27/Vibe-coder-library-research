@@ -7,112 +7,113 @@ Open-source knowledge base: **everything you need to check before launching a we
 
 ---
 
-## Что внутри: 26 пунктов + бонусы
+## What's inside / Что внутри: 26 points + extras / 26 пунктов + бонусы
 
-### Пользователь и доступ
+### User & Access / Пользователь и доступ
 
-| # | Тема | Одной строкой |
-|---|------|--------------|
-| 01 | [Auth](points/01-Auth.md) | Регистрация, вход, OAuth, magic link через Supabase Auth |
-| 02 | [RLS](points/02-Authorization-RLS.md) | Роли и Row Level Security — данные видит только владелец |
-| 03 | [152-ФЗ](points/03-Legal-152FZ.md) | Согласие на ПДн, политика конфиденциальности, закон РФ |
+| # | Topic | In one line | Одной строкой |
+|---|-------|-------------|--------------|
+| 01 | [Auth](points/01-Auth.md) | Registration, login, OAuth, magic link via Supabase Auth | Регистрация, вход, OAuth, magic link через Supabase Auth |
+| 02 | [RLS](points/02-Authorization-RLS.md) | Roles and Row Level Security — only owner sees data | Роли и Row Level Security — данные видит только владелец |
+| 03 | [152-FZ](points/03-Legal-152FZ.md) | PD consent, privacy policy, Russian data law | Согласие на ПДн, политика конфиденциальности, закон РФ |
 
-### Внешний вид и UX
+### UI & UX / Внешний вид и UX
 
-| # | Тема | Одной строкой |
-|---|------|--------------|
-| 04 | [Тема](points/04-UI-Theme.md) | Светлая/тёмная тема без мерцания при загрузке |
-| 05 | [SEO](points/05-SEO.md) | sitemap, robots.txt, JSON-LD, мета-теги для поиска |
-| 06 | [Скорость](points/06-Performance.md) | Core Web Vitals: LCP, CLS, INP — чтобы Google не понижал |
-| 07 | [Доступность](points/07-Accessibility.md) | a11y: клавиатура, скринридер, контраст, ARIA |
-| 08 | [Формы](points/08-Forms.md) | Валидация, Zod-схемы, серверные экшены, UX ошибок |
-| 14 | [PWA и OG](points/14-PWA-Favicon-OG.md) | Иконки, manifest, OG-картинки для соцсетей |
-| 19 | [Онбординг](points/19-Search-Onboarding.md) | Поиск, пустые состояния, первый запуск |
+| # | Topic | In one line | Одной строкой |
+|---|-------|-------------|--------------|
+| 04 | [Theme](points/04-UI-Theme.md) | Light/dark theme without flash on load | Светлая/тёмная тема без мерцания при загрузке |
+| 05 | [SEO](points/05-SEO.md) | sitemap, robots.txt, JSON-LD, meta tags | sitemap, robots.txt, JSON-LD, мета-теги для поиска |
+| 06 | [Performance](points/06-Performance.md) | Core Web Vitals: LCP, CLS, INP — keep Google happy | Core Web Vitals: LCP, CLS, INP — чтобы Google не понижал |
+| 07 | [Accessibility](points/07-Accessibility.md) | a11y: keyboard, screen reader, contrast, ARIA | a11y: клавиатура, скринридер, контраст, ARIA |
+| 08 | [Forms](points/08-Forms.md) | Validation, Zod schemas, server actions, error UX | Валидация, Zod-схемы, серверные экшены, UX ошибок |
+| 14 | [PWA & OG](points/14-PWA-Favicon-OG.md) | Icons, manifest, OG images for social sharing | Иконки, manifest, OG-картинки для соцсетей |
+| 19 | [Onboarding](points/19-Search-Onboarding.md) | Search, empty states, first launch experience | Поиск, пустые состояния, первый запуск |
 
-### Бэкенд и данные
+### Backend & Data / Бэкенд и данные
 
-| # | Тема | Одной строкой |
-|---|------|--------------|
-| 09 | [Ошибки](points/09-Errors.md) | error.tsx, not-found, глобальный перехват, fallback |
-| 15 | [Схема БД](points/15-DB-Schema.md) | Таблицы, миграции, индексы, связи |
-| 16 | [API](points/16-API-RateLimit.md) | Rate limiting, защита эндпоинтов, CORS |
-| 23 | [Пулинг](points/23-DB-Pooling.md) | Supavisor/pgBouncer — чтобы serverless не убил Postgres |
-| 25 | [Storage](points/25-Storage-RLS.md) | Загрузка файлов, приватные бакеты, RLS на storage |
-| 26 | [Кеш и откат](points/26-Cache-Rollback.md) | ISR, revalidate, мгновенный rollback деплоя |
+| # | Topic | In one line | Одной строкой |
+|---|-------|-------------|--------------|
+| 09 | [Errors](points/09-Errors.md) | error.tsx, not-found, global catch, fallback | error.tsx, not-found, глобальный перехват, fallback |
+| 15 | [DB Schema](points/15-DB-Schema.md) | Tables, migrations, indexes, relations | Таблицы, миграции, индексы, связи |
+| 16 | [API](points/16-API-RateLimit.md) | Rate limiting, endpoint protection, CORS | Rate limiting, защита эндпоинтов, CORS |
+| 23 | [Pooling](points/23-DB-Pooling.md) | Supavisor/pgBouncer — so serverless won't kill Postgres | Supavisor/pgBouncer — чтобы serverless не убил Postgres |
+| 25 | [Storage](points/25-Storage-RLS.md) | File uploads, private buckets, RLS on storage | Загрузка файлов, приватные бакеты, RLS на storage |
+| 26 | [Cache & Rollback](points/26-Cache-Rollback.md) | ISR, revalidate, instant deploy rollback | ISR, revalidate, мгновенный rollback деплоя |
 
-### Безопасность и секреты
+### Security & Secrets / Безопасность и секреты
 
-| # | Тема | Одной строкой |
-|---|------|--------------|
-| 12 | [Env](points/12-Env-Secrets.md) | .env.local, NEXT_PUBLIC, где хранить ключи |
-| 21 | [Gitleaks](points/21-Gitleaks-PreCommit.md) | Pre-commit хук: секрет не попадёт в коммит |
-| 30 | [Чек-лист](security/30-Security-Checklist.md) | 10 проверок безопасности перед запуском |
+| # | Topic | In one line | Одной строкой |
+|---|-------|-------------|--------------|
+| 12 | [Env](points/12-Env-Secrets.md) | .env.local, NEXT_PUBLIC, where to store keys | .env.local, NEXT_PUBLIC, где хранить ключи |
+| 21 | [Gitleaks](points/21-Gitleaks-PreCommit.md) | Pre-commit hook: secrets won't reach the commit | Pre-commit хук: секрет не попадёт в коммит |
+| 30 | [Checklist](security/30-Security-Checklist.md) | 10 security checks before launch | 10 проверок безопасности перед запуском |
 
-### Мониторинг и аналитика
+### Monitoring & Analytics / Мониторинг и аналитика
 
-| # | Тема | Одной строкой |
-|---|------|--------------|
-| 10 | [Аналитика](points/10-Analytics.md) | Яндекс Метрика, цели, вебвизор |
-| 13 | [Логи](points/13-Logging-Sentry.md) | Sentry для ошибок, структурированные логи |
+| # | Topic | In one line | Одной строкой |
+|---|-------|-------------|--------------|
+| 10 | [Analytics](points/10-Analytics.md) | Yandex Metrika, goals, session replay | Яндекс Метрика, цели, вебвизор |
+| 13 | [Logging](points/13-Logging-Sentry.md) | Sentry for errors, structured logs | Sentry для ошибок, структурированные логи |
 
-### Коммуникации и деньги
+### Communications & Payments / Коммуникации и деньги
 
-| # | Тема | Одной строкой |
-|---|------|--------------|
-| 11 | [Email](points/11-Email.md) | Транзакционные письма через Resend |
-| 20 | [Платежи](points/20-Payments-YooKassa.md) | ЮKassa: приём оплаты, вебхуки, чеки |
+| # | Topic | In one line | Одной строкой |
+|---|-------|-------------|--------------|
+| 11 | [Email](points/11-Email.md) | Transactional emails via Resend | Транзакционные письма через Resend |
+| 20 | [Payments](points/20-Payments-YooKassa.md) | YooKassa: accepting payments, webhooks, receipts | ЮKassa: приём оплаты, вебхуки, чеки |
 
-### Инфраструктура
+### Infrastructure / Инфраструктура
 
-| # | Тема | Одной строкой |
-|---|------|--------------|
-| 17 | [Бэкапы](points/17-Backups-DR.md) | Автобэкапы БД, план восстановления |
-| 18 | [Тесты](points/18-Testing.md) | Vitest, Playwright, что тестировать первым |
-| 22 | [CLAUDE.md](points/22-CLAUDE-MD.md) | Контекст для AI — чтобы Claude понимал проект |
-| 24 | [Staging](points/24-Staging.md) | Тестовая среда, preview deploys, seed data |
-
----
-
-## Бонусы
-
-| Раздел | Что внутри |
-|--------|-----------|
-| [Deploy: Vercel](deploy/Deploy-Vercel.md) | Деплой фронта, переменные окружения, домен |
-| [Deploy: Timeweb](deploy/Deploy-Timeweb.md) | Российский хостинг для 152-ФЗ |
-| [Deploy: VPS](deploy/Deploy-VPS.md) | Свой сервер: Docker, Nginx, SSL, CI/CD |
-| [Юр. шаблоны](legal/) | Политика конфиденциальности, согласие на ПДн |
-| [.gitignore](templates/gitignore-vaibcoder.md) | Эталонный шаблон: 11 категорий, включая AI-конфиги |
-| [Boilerplates](templates/Templates.md) | Готовые репозитории под форк |
+| # | Topic | In one line | Одной строкой |
+|---|-------|-------------|--------------|
+| 17 | [Backups](points/17-Backups-DR.md) | Auto DB backups, disaster recovery plan | Автобэкапы БД, план восстановления |
+| 18 | [Testing](points/18-Testing.md) | Vitest, Playwright, what to test first | Vitest, Playwright, что тестировать первым |
+| 22 | [CLAUDE.md](points/22-CLAUDE-MD.md) | AI context — so Claude understands the project | Контекст для AI — чтобы Claude понимал проект |
+| 24 | [Staging](points/24-Staging.md) | Test environment, preview deploys, seed data | Тестовая среда, preview deploys, seed data |
 
 ---
 
-## Быстрый старт
+## Extras / Бонусы
 
-1. Открой **[00-system-check.md](00-system-check.md)** — 12 вопросов, которые включат нужные пункты
-2. Пройди по списку выше — каждый пункт = одна конкретная задача
-3. Перед запуском проверь **[Security Checklist](security/30-Security-Checklist.md)**
-
-Файлы — обычный Markdown. Работает как GitHub-репозиторий и как Obsidian vault.
+| Section / Раздел | EN | RU |
+|-------------------|----|----|
+| [Deploy: Vercel](deploy/Deploy-Vercel.md) | Frontend deploy, env vars, domain | Деплой фронта, переменные окружения, домен |
+| [Deploy: Timeweb](deploy/Deploy-Timeweb.md) | Russian hosting for 152-FZ compliance | Российский хостинг для 152-ФЗ |
+| [Deploy: VPS](deploy/Deploy-VPS.md) | Own server: Docker, Nginx, SSL, CI/CD | Свой сервер: Docker, Nginx, SSL, CI/CD |
+| [Legal templates](legal/) | Privacy policy, PD consent templates | Политика конфиденциальности, согласие на ПДн |
+| [.gitignore](templates/gitignore-vaibcoder.md) | Reference template: 11 categories incl. AI configs | Эталонный шаблон: 11 категорий, включая AI-конфиги |
+| [Boilerplates](templates/Templates.md) | Ready-to-fork starter repos | Готовые репозитории под форк |
 
 ---
 
-## Для AI-ассистентов / For AI Assistants
+## Quick Start / Быстрый старт
 
-> **Если пользователь скинул тебе эту ссылку — это справочная библиотека.**
-> Прочитай файл **AI-RULES.md** — он содержит ВСЕ правила в компактном виде (один запрос):
+1. Open / Открой **[00-system-check.md](00-system-check.md)** — 12 questions that activate the right points / 12 вопросов, которые включат нужные пункты
+2. Go through the list above — each point = one specific task / Пройди по списку — каждый пункт = одна задача
+3. Before launch check / Перед запуском проверь **[Security Checklist](security/30-Security-Checklist.md)**
+
+Markdown files. Works as a GitHub repo and as an Obsidian vault.
+Файлы Markdown. Работает как GitHub-репозиторий и как Obsidian vault.
+
+---
+
+## For AI Assistants / Для AI-ассистентов
+
+> **You received a link to this library? Read AI-RULES.md — all 26 rules in one file:**
+> **Получил ссылку на эту библиотеку? Прочитай AI-RULES.md — все 26 правил в одном файле:**
 >
 > ```
 > https://raw.githubusercontent.com/ilnyr27/Vibe-coder-library-research/main/AI-RULES.md
 > ```
 >
-> Если нужны подробности по конкретному пункту — читай полную заметку:
+> For details on a specific point / За деталями по конкретному пункту:
 > ```
 > https://raw.githubusercontent.com/ilnyr27/Vibe-coder-library-research/main/points/01-Auth.md
 > ```
-> Замени `01-Auth.md` на нужный файл (01–26 + `security/30-Security-Checklist.md`).
+> Replace `01-Auth.md` with the needed file (01–26 + `security/30-Security-Checklist.md`).
 >
-> **Порядок:** прочитай AI-RULES.md → применяй правила → за деталями иди в points/.
+> **Workflow:** read AI-RULES.md → apply rules → fetch points/ for details.
 
 ---
 
-**Лицензия:** MIT — бери, правь, используй.
+**License / Лицензия:** MIT — use, modify, share freely. / Бери, правь, используй.
