@@ -12,7 +12,7 @@ A bilingual knowledge base for shipping production websites fast and error-free.
 
 ## Структура / Structure
 ```
-points/    — 30 главных пунктов любого сайта (заметки 01..20 + сводки)
+points/    — 26 пунктов: от Auth до Rollback (заметки 01..26)
 security/  — чек-лист безопасности перед запуском
 deploy/    — Vercel · Timeweb · свой VPS
 legal/     — 152-ФЗ: шаблоны согласия и политики

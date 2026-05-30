@@ -10,7 +10,7 @@ updated: 2026-05-30
 **RU:** Корневая заметка. Сначала пройди [[00-system-check]] — он включит нужные пункты. Потом иди по ссылкам ниже.
 **EN:** Root note. First run [[00-system-check]]; it switches on the relevant subset of the 30 points, then follow the links.
 
-## 30 пунктов / 30 points
+## 26 пунктов / 26 points
 - [[01-Auth]] — Аутентификация / Authentication
 - [[02-Authorization-RLS]] — Роли и Row Level Security
 - [[03-Legal-152FZ]] — Юр-документы и 152-ФЗ ⚠️
@@ -31,6 +31,12 @@ updated: 2026-05-30
 - [[18-Testing]] — Тестирование
 - [[19-Search-Onboarding]] — Поиск и пустые состояния
 - [[20-Payments-YooKassa]] — Платежи (ЮKassa)
+- [[21-Gitleaks-PreCommit]] — Защита от утечки секретов
+- [[22-CLAUDE-MD]] — Контекст для AI (CLAUDE.md)
+- [[23-DB-Pooling]] — Пулинг соединений к БД
+- [[24-Staging]] — Staging vs Production
+- [[25-Storage-RLS]] — Supabase Storage + RLS
+- [[26-Cache-Rollback]] — Кеширование и откат деплоя
 
 ## Безопасность / Security
 - [[30-Security-Checklist]] — 10 проверок перед запуском
