@@ -1,0 +1,15 @@
+name: Postgres backup
+on:
+  schedule:
+    - cron: '0 3 * * *'   # 03:00 UTC ежедневно
+  workflow_dispatch:
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pg_dump to off-site
+        run: |
+          TS=$(date +%F)
+          pg_dump "${{ secrets.DATABASE_URL }}" --format=custom -f "backup-$TS.dump"
+          test -s "backup-$TS.dump" || { echo "empty dump"; exit 1; }
+          # TODO: upload backup-$TS.dump to S3/R2 (aws s3 cp ...)
