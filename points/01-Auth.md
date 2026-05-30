@@ -40,7 +40,8 @@ AI-ассистенты часто генерируют форму логина,
 
 4. **Update Password** (установка нового пароля)
    - Пользователь пришёл по ссылке из email / User arrived via email link
-   - Одно поле нового пароля + show/hide / One new password field + show/hide
+   - ДВА поля: новый пароль + подтверждение, оба скрыты / TWO fields: new password + confirm, both hidden
+   - Если не совпадают → ошибка «Пароли не совпадают» / If mismatch → "Passwords don't match" error
    - `supabase.auth.updateUser({ password })` 
    - После успеха → редирект в приложение / After success → redirect to app
 
@@ -75,11 +76,12 @@ if (user && isAuthRoute) return redirect('/dashboard');
 ```
 
 ## UX-паттерн пароля / Password UX
-**ОДНО поле пароля + «показать/скрыть». БЕЗ «повторите пароль». ВЕЗДЕ: регистрация, сброс, смена.**
-**ONE password field + show/hide toggle. NO "confirm password". EVERYWHERE: register, reset, change.**
-Кейс Zuko: удаление confirm-password дало **+56,3% конверсии** без роста сбросов.
-*Zuko case: removing confirm-password gave +56.3% conversion with no increase in resets.*
+**Регистрация:** ОДНО поле пароля + «показать/скрыть». БЕЗ «повторите пароль».
+**Register:** ONE password field + show/hide toggle. NO "confirm password".
+Кейс Zuko: удаление confirm-password при регистрации дало **+56,3% конверсии**.
 
+**Сброс/смена пароля:** ДВА поля (новый + подтверждение), оба скрыты по умолчанию. Ошибка в пароле = пользователь снова заблокирован.
+**Reset/change password:** TWO fields (new + confirm), both hidden by default. Typo = user locked out again.
 - Правила пароля показывай **сразу** у поля, не после ошибки / Show password rules inline, not after error
 - Валидируй на отправке, не на каждое нажатие → [[08-Forms]] / Validate on submit, not on every keystroke
 - Ссылку «Забыли пароль?» — под полем пароля / "Forgot password?" link — below password field
