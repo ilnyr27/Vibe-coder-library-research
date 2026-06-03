@@ -7,7 +7,7 @@ Open-source knowledge base: **everything you need to check before launching a we
 
 ---
 
-## What's inside / Что внутри: 26 points + extras / 26 пунктов + бонусы
+## What's inside / Что внутри: 28 points + extras / 28 пунктов + бонусы
 
 ### User & Access / Пользователь и доступ
 
@@ -46,6 +46,7 @@ Open-source knowledge base: **everything you need to check before launching a we
 |---|-------|-------------|--------------|
 | 12 | [Env](points/12-Env-Secrets.md) | .env.local, NEXT_PUBLIC, where to store keys | .env.local, NEXT_PUBLIC, где хранить ключи |
 | 21 | [Gitleaks](points/21-Gitleaks-PreCommit.md) | Pre-commit hook: secrets won't reach the commit | Pre-commit хук: секрет не попадёт в коммит |
+| 27 | [Admin Panel](points/27-Admin-Panel.md) | RBAC, MFA, audit log, CVE-2025-29927 fix | Админ-панель: роли, 2FA, аудит, CVE-2025-29927 |
 | 30 | [Checklist](security/30-Security-Checklist.md) | 10 security checks before launch | 10 проверок безопасности перед запуском |
 
 ### Monitoring & Analytics / Мониторинг и аналитика
@@ -70,6 +71,7 @@ Open-source knowledge base: **everything you need to check before launching a we
 | 18 | [Testing](points/18-Testing.md) | Vitest, Playwright, what to test first | Vitest, Playwright, что тестировать первым |
 | 22 | [CLAUDE.md](points/22-CLAUDE-MD.md) | AI context — so Claude understands the project | Контекст для AI — чтобы Claude понимал проект |
 | 24 | [Staging](points/24-Staging.md) | Test environment, preview deploys, seed data | Тестовая среда, preview deploys, seed data |
+| 28 | [AI Support](points/28-AI-Support.md) | AI chat: YandexGPT, Telegram alerts, prompt design | AI-поддержка: YandexGPT, Telegram, prompt design |
 
 ---
 

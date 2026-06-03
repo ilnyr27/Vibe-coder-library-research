@@ -4,13 +4,13 @@ project: vaibcoder-library
 type: hub
 updated: 2026-05-30
 ---
-
 # 🧰 VAIBCODER — Хаб / Hub
 
 **RU:** Корневая заметка. Сначала пройди [[00-system-check]] — он включит нужные пункты. Потом иди по ссылкам ниже.
 **EN:** Root note. First run [[00-system-check]]; it switches on the relevant subset of the 30 points, then follow the links.
 
-## 26 пунктов / 26 points
+## 28 пунктов / 28 points
+
 - [[01-Auth]] — Аутентификация / Authentication
 - [[02-Authorization-RLS]] — Роли и Row Level Security
 - [[03-Legal-152FZ]] — Юр-документы и 152-ФЗ ⚠️
@@ -37,12 +37,17 @@ updated: 2026-05-30
 - [[24-Staging]] — Staging vs Production
 - [[25-Storage-RLS]] — Supabase Storage + RLS
 - [[26-Cache-Rollback]] — Кеширование и откат деплоя
+- [[27-Admin-Panel]] — Админ-панель: RBAC, MFA, аудит, CVE-2025-29927
+- [[28-AI-Support]] — AI-поддержка: YandexGPT/GigaChat, Telegram, prompt design
 
 ## Безопасность / Security
+
 - [[30-Security-Checklist]] — 10 проверок перед запуском
 
 ## Деплой / Deploy
+
 - [[Deploy-Vercel]] · [[Deploy-Timeweb]] · [[Deploy-VPS]]
 
 ## Шаблоны / Templates
+
 - [[Templates]] — boilerplate-репозитории под форк

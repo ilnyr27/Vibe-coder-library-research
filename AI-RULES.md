@@ -202,6 +202,32 @@
 9. Cookies: httpOnly, secure, sameSite
 10. Input validation everywhere / Валидация ввода везде
 
+## 27. Admin Panel / Админ-панель
+- Solo dev: protected `/admin` route group inside the same app / защищённый `/admin` внутри того же приложения
+- **CVE-2025-29927 (CVSS 9.1):** middleware bypass via `x-middleware-subrequest` header. Patch Next.js ≥ 15.2.3 + strip header at Nginx / Обход middleware — обнови Next.js + убери заголовок на Nginx
+- **NEVER rely on middleware as security boundary** — authz in data layer (RLS + server-side role checks) / НИКОГДА не полагайся на middleware — авторизация в data layer
+- TOTP 2FA (MFA) on every admin account, enforce AAL2 in app + RLS / TOTP 2FA на каждом админ-аккаунте
+- Roles in `app_metadata` NOT `user_metadata` (users can modify user_metadata!) / Роли в `app_metadata`
+- RBAC: `user_roles` table + `SECURITY DEFINER` helper `is_admin()` / таблица ролей + хелпер
+- Append-only audit log (INSERT only, block UPDATE/DELETE via trigger) / Журнал аудита только на запись
+- Soft deletes (`deleted_at`) instead of hard DELETE / Мягкое удаление вместо полного
+- Security headers + `X-Robots-Tag: noindex` on admin / Заголовки безопасности + noindex
+- Telegram alert on new-device admin login / Telegram-алерт при входе с нового устройства
+- `service_role` BYPASSRLS — server only, NEVER in browser / только сервер, НИКОГДА в браузере
+
+## 28. AI Support / AI-поддержка
+- Persist EVERY message to RF Postgres FIRST, then call AI / Сохраняй ВСЕ сообщения в РФ-Postgres ДО вызова AI
+- **Prefer YandexGPT/GigaChat** — data stays in RF, no cross-border / данные в РФ, без трансграничной передачи
+- If using Claude/OpenAI: redact PII before sending + document anonymization risk analysis / обезличь ПДн + анализ рисков
+- System prompt: answer ONLY from KB (RAG), confidence < 85% → escalate to human / отвечай только из KB, уверенность < 85% → человеку
+- FORBIDDEN: invent features, prices, policies, timelines / ЗАПРЕЩЕНО: придумывать фичи, цены, сроки
+- Classify every conversation: complaint/objection/bug/feature/question + sentiment / Классифицируй каждый разговор
+- Telegram alerts on escalation with category + sentiment + snippet + link / Telegram-алерты при эскалации
+- Rate limit per IP/user (Upstash) + input validation + token caps / Rate limit + валидация + лимит токенов
+- **Supabase MCP lethal trifecta:** use READ-ONLY + project-scoped + manual approval, NEVER on prod with write / MCP только read-only + ручное подтверждение
+- Disclose AI to user + obtain consent + publish retention policy / Сообщи что это AI + согласие + политика хранения
+- OWASP LLM01 Prompt Injection (#1) — can't fully fix, use defense in depth / нельзя полностью устранить
+
 ## Full Site Audit / Полный аудит сайта
 - For a complete audit use the prompt from `templates/Audit-Prompt.md` — 10 roles, 80+ checks / Для полного аудита используй промпт из `templates/Audit-Prompt.md` — 10 ролей, 80+ проверок
 - Fetch: `https://raw.githubusercontent.com/ilnyr27/Vibe-coder-library-research/main/templates/Audit-Prompt.md`
