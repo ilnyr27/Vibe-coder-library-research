@@ -2,7 +2,7 @@
 tags: [auth, supabase, point]
 project: vaibcoder-library
 type: point
-updated: 2026-05-30
+updated: 2026-07-19
 ---
 
 # 1. Аутентификация / Authentication
@@ -22,33 +22,75 @@ AI-ассистенты часто генерируют форму логина,
 
 1. **Login** (вход / sign in)
    - Email + пароль / Email + password
+   - Кнопка «показать/скрыть пароль» (Eye icon) — ОБЯЗАТЕЛЬНА / Show/hide toggle — MANDATORY
    - Ссылка «Нет аккаунта? Зарегистрируйся» → ведёт на Register / "No account? Sign up" → links to Register
    - Ссылка «Забыли пароль?» → ведёт на Reset / "Forgot password?" → links to Reset
-   - OAuth-кнопки (Google, GitHub и т.д.) / OAuth buttons
+   - OAuth-кнопки (Google, GitHub и т.д.) / OAuth buttons (optional)
 
 2. **Register** (регистрация / sign up)
    - Email + пароль (ОДНО поле + show/hide) / Email + password (ONE field + show/hide)
+   - БЕЗ «повторите пароль» → повышает конверсию / NO "confirm password" → improves conversion
    - Ссылка «Уже есть аккаунт? Войди» → ведёт на Login / "Already have an account? Sign in" → links to Login
    - Согласие на обработку ПДн (отдельная галочка, НЕотмеченная) → [[03-Legal-152FZ]]
    - После отправки → «Проверь почту для подтверждения» / "Check your email to confirm"
+   - Если SMTP не настроен или домен не верифицирован → Supabase вернёт 500 (см. Грабли ниже)
 
 3. **Forgot Password / Reset** (сброс пароля)
    - Поле email + кнопка «Отправить ссылку» / Email field + "Send reset link" button
    - `supabase.auth.resetPasswordForEmail(email, { redirectTo })`
-   - После отправки → «Ссылка отправлена на почту» (НЕ говори, существует ли аккаунт — утечка информации) / "Link sent to email" (do NOT reveal if account exists)
+   - После отправки → «Ссылка отправлена на почту» — **НЕ сообщай, существует ли аккаунт** (утечка информации) / "Link sent to email" — do NOT reveal if account exists
    - Ссылка «Вернуться ко входу» → Login / "Back to login" → Login
+   - `redirectTo` должен вести на твой домен, не localhost / must point to your domain, not localhost
 
-4. **Update Password** (установка нового пароля)
+4. **Update Password** (установка нового пароля — по ссылке из письма)
    - Пользователь пришёл по ссылке из email / User arrived via email link
-   - ДВА поля: новый пароль + подтверждение, оба скрыты / TWO fields: new password + confirm, both hidden
+   - ДВА поля: новый пароль + подтверждение, **оба** с show/hide / TWO fields: new password + confirm, **both** with show/hide
    - Если не совпадают → ошибка «Пароли не совпадают» / If mismatch → "Passwords don't match" error
-   - `supabase.auth.updateUser({ password })` 
+   - Минимальные требования к паролю — показывай сразу, не после ошибки
+   - `supabase.auth.updateUser({ password })`
    - После успеха → редирект в приложение / After success → redirect to app
 
-5. **Auth Callback** (`app/auth/callback/route.ts`)
+5. **Auth Callback** (`app/auth/callback/route.ts`) — **без него ничего не работает**
    - Обрабатывает code exchange для email-подтверждения, сброса пароля, OAuth
+   - Без этого роута — auth-письма (подтверждение, сброс) не работают
    - Handles code exchange for email confirmation, password reset, OAuth
-   - Без этого роута — auth-письма не работают / Without this route — auth emails don't work
+
+6. **Delete Account** (удаление аккаунта) — **обязательно по 152-ФЗ** → [[03-Legal-152FZ]]
+   - Кнопка в настройках профиля, визуально второстепенная (деструктивное действие)
+   - Обязательный confirm-диалог: «Это действие нельзя отменить. Все данные будут удалены.»
+   - Маршрут `DELETE /api/user/delete` с service_role (обход RLS)
+   - Порядок: сначала удаляем все дочерние таблицы → потом `auth.admin.deleteUser(userId)`
+   - **Удалять ВСЕ связанные таблицы** — orphaned rows остаются в БД бессрочно
+   - После: sign out + редирект на главную
+
+```ts
+// app/api/user/delete/route.ts — ШАБЛОН / TEMPLATE
+export async function DELETE() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return Response.json({ error: "Unauthorized" }, { status: 401 });
+
+  const admin = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { cookies: { getAll: () => [], setAll: () => {} } }
+  );
+
+  // СПИСОК ТАБЛИЦ СОСТАВЛЯЙ ПРИ ПРОЕКТИРОВАНИИ БД — не забудь ни одну
+  await Promise.all([
+    admin.from("user_plans").delete().eq("user_id", user.id),
+    admin.from("chat_sessions").delete().eq("user_id", user.id),   // ← часто забывают
+    admin.from("payments").delete().eq("user_id", user.id),
+    admin.from("user_reports").delete().eq("user_id", user.id),
+    admin.from("test_results").delete().eq("user_id", user.id),
+    // добавь все свои таблицы...
+  ]);
+
+  const { error } = await admin.auth.admin.deleteUser(user.id);
+  if (error) return Response.json({ error: "Failed to delete account" }, { status: 500 });
+  return Response.json({ ok: true });
+}
+```
 
 ### Переходы / Transitions
 
@@ -67,44 +109,85 @@ Callback → App           (после успешной верификации /
 const { data: { user } } = await supabase.auth.getUser();
 
 // Не аутентифицирован → редирект на /login
-// Not authenticated → redirect to /login
 if (!user && isProtectedRoute) return redirect('/login');
 
 // Уже аутентифицирован → не показывай login/register
-// Already authenticated → don't show login/register  
 if (user && isAuthRoute) return redirect('/dashboard');
 ```
 
 ## UX-паттерн пароля / Password UX
-**Кнопка «показать/скрыть» (глаз) — ОБЯЗАТЕЛЬНА на каждом поле пароля: вход, регистрация, сброс, смена.**
-**Show/hide toggle (eye icon) — MANDATORY on every password field: login, register, reset, change.**
 
-**Регистрация:** ОДНО поле пароля + показать/скрыть. БЕЗ «повторите пароль».
-**Register:** ONE password field + show/hide. NO "confirm password".
-Кейс Zuko: удаление confirm-password при регистрации дало **+56,3% конверсии**.
+**Кнопка «показать/скрыть» (Eye icon) — ОБЯЗАТЕЛЬНА на каждом поле пароля: вход, регистрация, сброс, смена.**
+**Show/hide toggle — MANDATORY on every password field: login, register, reset, change.**
 
-**Вход:** поле пароля + показать/скрыть.
-**Login:** password field + show/hide.
+| Экран | Полей пароля | show/hide | Подтверждение |
+|-------|-------------|-----------|---------------|
+| Login | 1 | ✅ | ❌ |
+| Register | 1 | ✅ | ❌ (убери!) |
+| Reset (ввод нового) | 2 | ✅ на каждом | ✅ |
 
-**Сброс/смена пароля:** ДВА поля (новый + подтверждение), оба с кнопкой показать/скрыть. Ошибка в пароле = пользователь снова заблокирован.
-**Reset/change password:** TWO fields (new + confirm), both with show/hide toggle. Typo = user locked out again.
-- Правила пароля показывай **сразу** у поля, не после ошибки / Show password rules inline, not after error
-- Валидируй на отправке, не на каждое нажатие → [[08-Forms]] / Validate on submit, not on every keystroke
-- Ссылку «Забыли пароль?» — под полем пароля / "Forgot password?" link — below password field
-- Защищённые роуты — проверка сессии в middleware / Protected routes — session check in middleware
+**Почему БЕЗ «повторите пароль» при регистрации:**
+Кейс Zuko: удаление confirm-password дало **+56,3% конверсии**. Если пользователь ошибся — у него есть show/hide и есть сброс пароля.
+
+**Остальные правила:**
+- Требования к паролю — показывай сразу рядом с полем, не после ошибки
+- Ссылку «Забыли пароль?» — под полем пароля, не в другом месте
+- Валидируй форму на submit, не на каждое нажатие → [[08-Forms]]
 
 ## Грабли / Gotchas
 
-**Зависимости / Dependencies:**
-- `zod` должен быть УСТАНОВЛЕН (`npm i zod`), если используешь zod-схемы для форм. AI часто импортирует zod, но не добавляет в зависимости → страница падает при загрузке.
-- `zod` must be INSTALLED (`npm i zod`) if you use zod schemas for forms. AI often imports zod but doesn't add it to dependencies → page crashes on load.
-- Проверяй: `@supabase/supabase-js`, `@supabase/ssr`, `react-hook-form`, `@hookform/resolvers` — всё должно быть в package.json / Verify all deps are in package.json
+### 🔥 SMTP + Resend: главная ловушка прода (реальный кейс)
 
-**Email и SMTP:**
-- Стандартный SMTP Supabase ≈ 2 письма/час → для прода подключи Resend → [[11-Email]] / Default SMTP = 2 emails/hr → connect Resend for prod
-- Без настройки SMTP — письма подтверждения и сброса пароля не дойдут в проде / Without SMTP setup — confirmation and reset emails won't arrive in prod
+**Симптом:** Пользователи нажимают «Зарегистрироваться» → Supabase возвращает HTTP 500. В логах `supabase-auth`:
 
-**Безопасность / Security:**
-- Никогда не клади `service_role` в браузер → [[12-Env-Secrets]] / Never put `service_role` in browser
-- На странице сброса пароля НЕ сообщай, существует ли аккаунт — это утечка информации / On reset page do NOT reveal if account exists — information leak
-- `redirectTo` в resetPasswordForEmail должен вести на твой домен, не на localhost / `redirectTo` must point to your domain, not localhost
+```
+"error": "gomail: could not send email 1: 550 You can only send testing emails
+to your own email address (you@gmail.com). To send emails to other recipients,
+please verify a domain at resend.com/domains"
+```
+
+**Причина:** Resend без верифицированного домена отправляет письма **только на email владельца Resend-аккаунта**. Любой другой пользователь → 550 → Supabase auth → 500 при регистрации.
+
+**Как диагностировать:**
+```bash
+docker logs supabase-auth --tail=50 | grep -i "error\|smtp\|550"
+```
+
+**Решения:**
+
+1. **Правильное** — верифицировать домен в Resend:
+   - resend.com/domains → Add domain
+   - Добавить DNS-записи (DKIM TXT, SPF MX + TXT, DMARC TXT) у регистратора
+   - Домен `.ru` на REG.RU → reg.ru → Мои домены → DNS
+   - После верификации обновить:
+     ```bash
+     # supabase/docker/.env
+     SMTP_ADMIN_EMAIL=noreply@yourdomain.ru
+     # приложение .env
+     EMAIL_FROM=Проект <noreply@yourdomain.ru>
+     # перезапустить auth
+     docker compose up -d auth
+     ```
+
+2. **Временный обход** (пока домен не верифицирован):
+   ```bash
+   # supabase/docker/.env
+   ENABLE_EMAIL_AUTOCONFIRM=true   # ← пользователи регистрируются без письма
+   docker compose up -d auth
+   ```
+   ⚠️ `AUTOCONFIRM=true` отключает также письмо сброса пароля. Вернуть `false` после верификации.
+
+### Зависимости
+
+- `zod` — AI часто импортирует, но не ставит. Проверяй `package.json`
+- Обязательно: `@supabase/supabase-js`, `@supabase/ssr`, `react-hook-form`, `@hookform/resolvers`
+
+### Стандартный SMTP Supabase
+
+≈ 2 письма/час — только для разработки. В проде **обязательно** Resend → [[11-Email]]
+
+### Безопасность / Security
+
+- `service_role` — только на сервере, никогда в браузере → [[12-Env-Secrets]]
+- Сброс пароля: не раскрывай, существует ли аккаунт с этим email (information leak)
+- Удаление аккаунта: проверяй `getUser()` в роуте, не из куки — защита от CSRF
