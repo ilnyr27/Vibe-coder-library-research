@@ -48,7 +48,9 @@ updated: 2026-05-30
 
 ## Деплой / Deploy
 
-- [[Deploy-Vercel]] · [[Deploy-Timeweb]] · [[Deploy-VPS]]
+- [[Deploy-HomeServer]] ← **рекомендуется для .ru** (домашний сервер, Docker, Nginx)
+- [[Deploy-Vercel]] ⚠️ нестабилен в РФ без VPN (РКН throttle-ит Cloudflare)
+- [[Deploy-Timeweb]] · [[Deploy-VPS]]
 
 ## Шаблоны / Templates
 
