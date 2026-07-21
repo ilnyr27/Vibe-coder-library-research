@@ -9,7 +9,7 @@ updated: 2026-05-30
 **RU:** Корневая заметка. Сначала пройди [[00-system-check]] — он включит нужные пункты. Потом иди по ссылкам ниже.
 **EN:** Root note. First run [[00-system-check]]; it switches on the relevant subset of the 30 points, then follow the links.
 
-## 28 пунктов / 28 points
+## 31 пункт / 31 points
 
 - [[01-Auth]] — Аутентификация / Authentication
 - [[02-Authorization-RLS]] — Роли и Row Level Security
@@ -39,6 +39,8 @@ updated: 2026-05-30
 - [[26-Cache-Rollback]] — Кеширование и откат деплоя
 - [[27-Admin-Panel]] — Админ-панель: RBAC, MFA, аудит, CVE-2025-29927
 - [[28-AI-Support]] — AI-поддержка: YandexGPT/GigaChat, Telegram, prompt design
+- [[29-AI-LLM]] — AI/LLM интеграция: провайдеры для РФ, SSE-стриминг, rate limit
+- [[31-Freemium]] — Freemium: лимиты, атомарные счётчики, paywall, DB-схема
 
 ## Безопасность / Security
 
